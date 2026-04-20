@@ -22,7 +22,18 @@ symbol_value  = {
 }
 
 
-def chceck_winnings(columns, lines, bet,values):
+def check_winnings(columns, lines, bet, values):
+     winnings = 0
+     for line in range(lines):
+         symbol = columns[0][line]
+         for column in columns:
+             symbol_to_check = column[line]
+             if symbol != symbol_to_check:
+                 break
+             else:
+                 winnings += values[symbol] * bet
+
+     return winnings
     
 
 
@@ -113,5 +124,7 @@ def main():
 
     slots = get_slot_machine_spin(ROWS, COLS, symbol_count)
     print_slot_machine(slots)
+    winnings = check_winnings(slots, lines, bet, symbol_value)
+    print(f"You won ${winnings}")
 
 main()
